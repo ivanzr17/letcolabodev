@@ -14,11 +14,15 @@ import { faUser } from "@fortawesome/free-solid-svg-icons";
 import ImageUpload from "@/app/components/ImageUpload";
 import savePost from "../actions/postActions";
 import redirectTo from "../actions/redirectTo";
+import { Post } from "@/models/Post";
 
-const Form = ({ orgId }: { orgId: string }) => {
+const Form = ({ orgId, postDoc }: { orgId: string, postDoc?: Post }) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSavePost = async (data: FormData) => {
+    if (postDoc) {
+      data.set("id", postDoc._id);
+    }
     setIsLoading(true);
     data.append("orgId", orgId);
     try {
