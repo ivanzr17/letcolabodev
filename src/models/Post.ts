@@ -1,4 +1,5 @@
-import { model, models, Schema } from "mongoose";
+import mongoose, { model, models, Schema } from "mongoose";
+import { AutoPaginatable, OrganizationMembership, User, WorkOS } from "@workos-inc/node";
 
 export type Post = {
     _id: string;
@@ -41,5 +42,27 @@ const PostSchema = new Schema({
     timestamps: true,
 
 });
+
+export async function addData (projectInfo: Post[], user: User | null) {
+    projectInfo = JSON.parse(JSON.stringify(projectInfo));
+    await mongoose.connect(process.env.MONGO_URI as string);
+    const workos = new WorkOS(process.env.WORKOS_API_KEY);
+    let membership: AutoPaginatable<OrganizationMembership> | null = null;
+  if (user) {
+    membership = await workos.userManagement.listOrganizationMemberships({
+      userId: user?.id,
+    });
+  }
+  for (const post of projectInfo) {
+    const org = await workos.organizations.getOrganization(post.orgId);
+    post.orgName = org.name;
+    if (membership && membership.data.length > 0) {
+      post.isAdmin = !!membership.data.find(
+        (m) => m.organizationId === post.orgId
+      );
+    }
+  }
+  return projectInfo;
+}
 
 export const PostModel = models?.Post || model("Post", PostSchema)

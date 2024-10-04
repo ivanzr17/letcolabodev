@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
 import { CldUploadWidget } from "next-cloudinary";
@@ -8,11 +8,20 @@ import { Button } from "@radix-ui/themes";
 const ImageUpload = ({
   icon,
   name,
+  defaultValue = "",
 }: {
   icon: IconDefinition;
   name: string;
+  defaultValue?: string;
 }) => {
   const [resource, setResource] = useState<any>(null);
+  const [url, setUrl] = useState(defaultValue);
+
+  useEffect(() => {
+    if (defaultValue) {
+      setResource({ secure_url: defaultValue });
+    }
+  }, [defaultValue]);
 
   const handleClick = (event: React.MouseEvent) => {
     event.preventDefault();
@@ -22,8 +31,6 @@ const ImageUpload = ({
     setResource(result.info);
     setUrl(result.info.secure_url);
   };
-
-  const [url, setUrl] = useState();
 
   return (
     <>

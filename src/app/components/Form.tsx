@@ -16,7 +16,7 @@ import savePost from "../actions/postActions";
 import redirectTo from "../actions/redirectTo";
 import { Post } from "@/models/Post";
 
-const Form = ({ orgId, postDoc }: { orgId: string, postDoc?: Post }) => {
+const Form = ({ orgId, postDoc }: { orgId: string; postDoc?: Post }) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSavePost = async (data: FormData) => {
@@ -47,12 +47,20 @@ const Form = ({ orgId, postDoc }: { orgId: string, postDoc?: Post }) => {
       >
         <div className="mb-1">
           <h3 className="font-medium mb-1">Título del proyecto</h3>
-          <TextField.Root placeholder="Nombre del proyecto" name="title" />
+          <TextField.Root
+            placeholder="Nombre del proyecto"
+            name="title"
+            defaultValue={postDoc?.title || ""}
+          />
         </div>
         <div className="grid grid-cols-2 gap-6">
           <div className=" gap-4 mb-1">
             <h3 className="font-medium">Nivel</h3>
-            <RadioGroup.Root name="level">
+            <RadioGroup.Root
+              required
+              name="level"
+              defaultValue={postDoc?.level || ""}
+            >
               <RadioGroup.Item value="Básico">Básico</RadioGroup.Item>
               <RadioGroup.Item value="Intermedio">Intermedio</RadioGroup.Item>
               <RadioGroup.Item value="Avanzado">Avanzado</RadioGroup.Item>
@@ -60,7 +68,11 @@ const Form = ({ orgId, postDoc }: { orgId: string, postDoc?: Post }) => {
           </div>
           <div className=" gap-4 mb-1">
             <h3 className="font-medium">Tipo de proyecto</h3>
-            <RadioGroup.Root name="project">
+            <RadioGroup.Root
+              name="project"
+              defaultValue={postDoc?.project || ""}
+              required
+            >
               <RadioGroup.Item value="Frontend">Frontend</RadioGroup.Item>
               <RadioGroup.Item value="Backend">Backend</RadioGroup.Item>
               <RadioGroup.Item value="FullStack">FullStack</RadioGroup.Item>
@@ -72,29 +84,48 @@ const Form = ({ orgId, postDoc }: { orgId: string, postDoc?: Post }) => {
           <TextField.Root
             placeholder="React, MongoDB, NodeJS, NextJS, Astro, ..."
             name="stack"
+            defaultValue={postDoc?.stack || ""}
+            required
           />
         </div>
         <div className="grid grid-cols-2 gap-6">
           <div id="icono">
             <h3 className="font-medium mb-1">Icono de la publicación</h3>
-            <ImageUpload name="icon" icon={faUser} />
+            <ImageUpload
+              name="icon"
+              icon={faUser}
+              defaultValue={postDoc?.icon || ""}
+            />
           </div>
           <div id="contacto">
             <h3 className="font-medium mb-1">Contacto</h3>
             <div className="flex gap-2">
               <div>
-                <ImageUpload name="contact.photo" icon={faUser} />
+                <ImageUpload
+                  name="contact.photo"
+                  icon={faUser}
+                  defaultValue={postDoc?.contact?.photo || ""}
+                />
               </div>
               <div className="grow">
-                <TextField.Root placeholder="Nombre" name="contact.name" />
+                <TextField.Root
+                  placeholder="Nombre"
+                  name="contact.name"
+                  defaultValue={postDoc?.contact?.name}
+                  required
+                />
                 <TextField.Root
                   placeholder="Mail"
                   name="contact.mail"
                   type="email"
+                  defaultValue={postDoc?.contact?.mail}
+                  required
                 />
                 <TextField.Root
                   placeholder="Linkedin"
                   name="contact.linkedin"
+                  defaultValue={postDoc?.contact?.linkedin}
+                  required
                 />
               </div>
             </div>
@@ -106,6 +137,8 @@ const Form = ({ orgId, postDoc }: { orgId: string, postDoc?: Post }) => {
             placeholder="Descripción del proyecto"
             resize={"vertical"}
             name="description"
+            defaultValue={postDoc?.description || ""}
+            required
           />
         </div>
         <div className="flex justify-center text-center">

@@ -1,7 +1,7 @@
 import { getUser } from "@workos-inc/authkit-nextjs";
 import React from "react";
 import { WorkOS } from "@workos-inc/node";
-import "@radix-ui/themes/styles.css";
+
 import Form from "@/app/components/Form";
 
 type PageProps = {

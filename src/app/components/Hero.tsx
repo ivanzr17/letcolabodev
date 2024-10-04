@@ -8,7 +8,7 @@ const Hero = () => {
         con otras personas!
       </h1>
 
-      <form className="flex gap-2 my-4 max-w-lg mx-auto">
+      {/* <form className="flex gap-2 my-4 max-w-lg mx-auto">
         <input
           type="search"
           className="border w-full py-2 px-3 rounded-md  border-gray-400 "
@@ -17,7 +17,7 @@ const Hero = () => {
         <button className="bg-blue-600 text-white py-2 px-4 rounded-md">
           Buscar
         </button>
-      </form>
+      </form> */}
     </section>
   );
 };

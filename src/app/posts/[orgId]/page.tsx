@@ -2,9 +2,10 @@ import React from "react";
 import { AutoPaginatable, WorkOS } from "@workos-inc/node";
 import Project from "@/app/components/Project";
 import mongoose from "mongoose";
-import { PostModel } from "@/models/Post";
+import { addData, PostModel } from "@/models/Post";
 import { getUser } from "@workos-inc/authkit-nextjs";
 import { OrganizationMembership } from "@workos-inc/node";
+import Link from "next/link";
 
 type PageProps = {
   params: {
@@ -20,26 +21,13 @@ const PostPage = async (props: PageProps) => {
   let projectInfo = JSON.parse(
     JSON.stringify(await PostModel.find({ orgId: org.id }))
   );
-  let membership: AutoPaginatable<OrganizationMembership> | null = null;
-  if (user) {
-    membership = await workos.userManagement.listOrganizationMemberships({
-      userId: user.id,
-    });
-  }
-  for (const post of projectInfo) {
-    const org = await workos.organizations.getOrganization(post.orgId);
-    post.orgName = org.name;
-    if (membership && membership.data.length > 0) {
-      post.isAdmin = !!membership.data.find(
-        (m) => m.organizationId === post.orgId
-      );
-    }
-  }
+
+  projectInfo = await addData(projectInfo, user);
   return (
     <div>
-      <div>
+      <Link href={"/posts/" + props.params.orgId}>
         <h1 className="text-4xl my-6"> {org.name}</h1>
-      </div>
+      </Link>
       <Project projects={projectInfo} header={"Proyectos de " + org.name} />
     </div>
   );
