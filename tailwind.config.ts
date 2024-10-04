@@ -8,6 +8,15 @@ const config: Config = {
   ],
   theme: {
     extend: {
+    //   container:{
+    //     screens: {
+    //     'lg': '768px',
+    //     'xl': '768px',
+    //     '2xl': '768px',
+    //   },
+    // },
+      
+          
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
