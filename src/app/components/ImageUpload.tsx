@@ -4,7 +4,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
 import { CldUploadWidget } from "next-cloudinary";
 import { Button } from "@radix-ui/themes";
-import Image from "next/image";
 
 const ImageUpload = ({
   icon,
@@ -38,7 +37,7 @@ const ImageUpload = ({
       <div>
         <div className="bg-gray-200 size-24 inline-flex items-center content-center justify-center rounded-md">
           {resource ? (
-            <Image
+            <img
               src={resource.secure_url}
               alt="Uploaded Image"
               className="rounded-md w-full h-full object-fill"
