@@ -6,12 +6,13 @@ import TimeStamp from "./timeStamp";
 import Link from "next/link";
 
 import axios from "axios";
+import Image from "next/image";
 
 const ProjectRow = ({ projectInfo }: { projectInfo: Post }) => {
   return (
     <div className="bg-white p-4 rounded-lg shadow-sm flex gap-4">
       <div className="content-center">
-        <img src={projectInfo?.icon} className="size-16" />
+        <Image alt="project icon" src={projectInfo?.icon} className="size-16" />
       </div>
       <div className="grow">
         <div>

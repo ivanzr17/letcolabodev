@@ -57,6 +57,7 @@ const NewPostPage = async () => {
         <div className="border inline-block rounded-md">
           {Object.keys(groupsNames).map((groupId) => (
             <Link
+              key={groupId}
               className={
                 "py-2 px-4 flex gap-2 items-center " +
                 (Object.keys(groupsNames)[0] === groupId ? "" : "border-t")
