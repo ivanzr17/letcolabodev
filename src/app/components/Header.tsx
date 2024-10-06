@@ -22,6 +22,7 @@ const Header = async () => {
           )}
           {user && (
             <form
+              className="flex gap-2"
               action={async () => {
                 "use server";
                 await signOut();
@@ -33,15 +34,14 @@ const Header = async () => {
               >
                 Logout
               </button>
+              <Link
+                className="bg-blue-600 text-white py-2 px-4 rounded-md"
+                href={"/new-post"}
+              >
+                Post
+              </Link>
             </form>
           )}
-
-          <Link
-            className="bg-blue-600 text-white py-2 px-4 rounded-md"
-            href={"/new-post"}
-          >
-            Post
-          </Link>
         </nav>
       </div>
     </header>
