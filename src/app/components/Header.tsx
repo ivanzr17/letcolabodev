@@ -7,7 +7,7 @@ const Header = async () => {
   const signInUrl = await getSignInUrl();
 
   return (
-    <header className="mt-4">
+    <header className="mt-4 mx-2 md:mx-0">
       <div className="flex items-center justify-between font-black text-xl">
         <Link href={"/"}>
           {" "}

@@ -10,11 +10,15 @@ import axios from "axios";
 const ProjectRow = ({ projectInfo }: { projectInfo: Post }) => {
   return (
     <div className="bg-white p-4 rounded-lg shadow-sm flex gap-4">
-      <div className="content-center">
-        <img alt="project icon" src={projectInfo?.icon} className="size-16" />
+      <div className="md:content-center flex">
+        <img
+          alt="project icon"
+          src={projectInfo?.icon}
+          className=" md:size-16 "
+        />
       </div>
       <div className="grow">
-        <div>
+        <div className="flex justify-between items-center ">
           <Link
             href={"/posts/" + projectInfo.orgId}
             className="text-gray-500 text-sm hover:underline"
@@ -22,6 +26,24 @@ const ProjectRow = ({ projectInfo }: { projectInfo: Post }) => {
             {" "}
             {projectInfo.orgName}{" "}
           </Link>
+          <span>
+            {" "}
+            {projectInfo.isAdmin && (
+              <div className="flex md:hidden text-gray-400">
+                <Link href={"/posts/edit/" + projectInfo._id}>Edit</Link>{" "}
+                &middot;{" "}
+                <button
+                  type="button"
+                  onClick={async () => {
+                    await axios.delete(`/api/posts?id=${projectInfo._id}`);
+                    window.location.reload();
+                  }}
+                >
+                  Delete
+                </button>
+              </div>
+            )}
+          </span>
         </div>
         <div>
           <Link
@@ -39,7 +61,7 @@ const ProjectRow = ({ projectInfo }: { projectInfo: Post }) => {
           <span>
             {" "}
             {projectInfo.isAdmin && (
-              <>
+              <div className="hidden md:flex">
                 &middot;{" "}
                 <Link href={"/posts/edit/" + projectInfo._id}>Edit</Link>{" "}
                 &middot;{" "}
@@ -52,7 +74,7 @@ const ProjectRow = ({ projectInfo }: { projectInfo: Post }) => {
                 >
                   Delete
                 </button>
-              </>
+              </div>
             )}
           </span>
         </div>

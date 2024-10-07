@@ -30,7 +30,7 @@ const Project = ({
   };
 
   return (
-    <div className="bg-slate-200 p-8 py-6 rounded-3xl font-bold">
+    <div className="bg-slate-200 p-1 py-6 rounded-3xl font-bold flex flex-col gap-4">
       <h2 className="font-bold mb-4">{header || "Proyectos"}</h2>
       <div className="flex flex-col gap-4">
         {!projects?.length && (

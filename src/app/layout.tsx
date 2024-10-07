@@ -16,7 +16,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={roboto.className}>
-        <main className="container mx-auto py-4 px-6">
+        <main className="container mx-auto py-4 ">
           <Header />
           {children}
           <footer className="container p-8 text-gray-500">

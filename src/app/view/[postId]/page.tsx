@@ -2,6 +2,7 @@ import React from "react";
 import { PostModel } from "@/models/Post";
 import mongoose from "mongoose";
 import Image from "next/image";
+import Link from "next/link";
 
 type PageProps = {
   params: {
@@ -48,12 +49,24 @@ const page = async (props: PageProps) => {
             height={500}
             className="w-auto h-auto max-w-24 max-h-24"
           />
-          <div className="flex content-center items-center">
+          <div className="flex-col content-center items-center">
             {postDoc.contact.name}
             <br />
-            Email: {postDoc.contact.mail}
+            <Link
+              href={"mailto:" + postDoc.contact.mail}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Mail: {postDoc.contact.mail}
+            </Link>
             <br />
-            Linkedin: {postDoc.contact.linkedin}
+            <Link
+              href={"https://www.linkedin.com/in/" + postDoc.contact.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Linkedin: {postDoc.contact.linkedin}
+            </Link>
           </div>
         </div>
       </div>
