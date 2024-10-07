@@ -34,7 +34,7 @@ const page = async (props: PageProps) => {
           />
         </div>
       </div>
-      <div className="whitespace-pre-line text-sm text-gray-600">
+      <div className="whitespace-pre-line text-sm text-gray-600 mx-1 md:mx-0">
         {postDoc.description}
       </div>
       <div className="mt-4 bg-gray-200 p-8 rounded-lg">
